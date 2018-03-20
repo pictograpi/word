@@ -21,6 +21,7 @@ module.exports = {
     new MiniCssExtractPlugin()
   ],
   resolve: {
+    modules: ["node_modules", "./src"],
     extensions: [".jsx", ".js"]
   }
 };
