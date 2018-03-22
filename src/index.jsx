@@ -2,11 +2,21 @@ import "./style.pcss";
 import React from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { render } from "react-dom";
+import CssBaseline from "material-ui/CssBaseline";
+
+import Header from "./components/header";
+import Menu from "./components/menu";
+import Home from "./views/home";
+import "./style.pcss";
 
 render(
   <BrowserRouter>
-    <h1>Boilerplate for React + TailwindCSS + Webpack</h1>
-    {/* Routes and components here */}
+    <React.Fragment>
+      <CssBaseline />
+      <Header />
+      <Menu />
+      <Route path="/" component={Home} />
+    </React.Fragment>
   </BrowserRouter>,
   document.getElementById("app-container")
 );

@@ -1,15 +1,17 @@
 {
-  "name": "react-tailwindcss-webpack",
+  "name": "pictograpi-word",
   "version": "1.0.0",
-  "description": "React + TailwindCSS + Webpack boilerplate",
+  "description": "An editor for pictographs",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack-serve --progress --mode development"
+    "dev": "webpack-serve --progress --watch --mode development"
   },
-  "author": "Adrián Gómez - https://adgllorente.com",
+  "author": "Pictograpi - https://pictograpi.com",
   "license": "MIT",
   "dependencies": {
+    "material-ui": "^1.0.0-beta.38",
+    "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2"
