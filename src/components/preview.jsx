@@ -1,14 +1,22 @@
 import React, { Component } from "react";
+import { withStyles } from "material-ui/styles";
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
 import Pictograph from "./pictograph";
-import "./preview.pcss";
 
-export default class Preview extends Component {
+const styles = theme => ({
+  preview: {
+    paddingTop: "2%"
+  }
+});
+
+class Preview extends Component {
   render() {
+    const { classes } = this.props;
+
     return (
       <Grid
-        className="w-preview"
+        className={classes.preview}
         container
         alignItems="center"
         justify="center"
@@ -31,3 +39,5 @@ export default class Preview extends Component {
     );
   }
 }
+
+export default withStyles(styles)(Preview);

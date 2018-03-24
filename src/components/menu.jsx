@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
 import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
@@ -12,9 +13,14 @@ import { FormControlLabel } from "material-ui/Form";
 import Switch from "material-ui/Switch";
 import Share from "material-ui-icons/Share";
 
-import "./menu.pcss";
+const styles = theme => ({
+  preview: {
+    flexGrow: 1,
+    justifyContent: "flex-end"
+  }
+});
 
-export default class Menu extends Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
 
@@ -28,8 +34,10 @@ export default class Menu extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <AppBar className="w-menu" position="sticky" color="default">
+      <AppBar position="sticky" color="default">
         <Toolbar>
           <IconButton color="inherit" aria-label="Print">
             <Print />
@@ -46,8 +54,8 @@ export default class Menu extends Component {
           <IconButton color="inherit" aria-label="Print">
             <Share />
           </IconButton>
-          <div className="w-menu--separator" />
           <FormControlLabel
+            className={classes.preview}
             control={
               <Switch
                 onChange={() => this.handleChangeIsPreview()}
@@ -63,3 +71,5 @@ export default class Menu extends Component {
     );
   }
 }
+
+export default withStyles(styles)(Menu);
