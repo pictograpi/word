@@ -4,8 +4,8 @@
   "description": "An editor for pictographs",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack-serve --progress --watch --mode development"
+    "build": "NODE_ENV=production webpack",
+    "dev": "webpack-serve --progress --watch"
   },
   "author": "Pictograpi - https://pictograpi.com",
   "license": "MIT",
@@ -14,6 +14,7 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2"
   },

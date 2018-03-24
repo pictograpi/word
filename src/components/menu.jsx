@@ -12,6 +12,8 @@ import FontDownload from "material-ui-icons/FontDownload";
 import { FormControlLabel } from "material-ui/Form";
 import Switch from "material-ui/Switch";
 import Share from "material-ui-icons/Share";
+import { connect } from "react-redux";
+import { togglePreview } from "reducers/preview";
 
 const styles = theme => ({
   preview: {
@@ -20,19 +22,17 @@ const styles = theme => ({
   }
 });
 
+const mapStateToProps = (state, ownProps) => {
+  return { isPreviewActive: state.preview.active };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onPreviewToggle: () => dispatch(togglePreview())
+  };
+};
+
 class Menu extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isPreview: false
-    };
-  }
-
-  handleChangeIsPreview() {
-    this.setState({ isPreview: !this.state.isPreview });
-  }
-
   render() {
     const { classes } = this.props;
 
@@ -55,11 +55,11 @@ class Menu extends Component {
             <Share />
           </IconButton>
           <FormControlLabel
+            onChange={this.props.onPreviewToggle}
             className={classes.preview}
             control={
               <Switch
-                onChange={() => this.handleChangeIsPreview()}
-                checked={this.state.isPreview}
+                checked={this.props.isPreviewActive}
                 value="isPreview"
                 color="primary"
               />
@@ -72,4 +72,6 @@ class Menu extends Component {
   }
 }
 
-export default withStyles(styles)(Menu);
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(Menu)
+);

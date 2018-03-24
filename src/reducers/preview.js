@@ -1,5 +1,4 @@
-const ACTIVATE = "word/preview/activate";
-const DEACTIVATE = "word/preview/deactivate";
+const TOGGLE = "word/preview/toggle";
 
 /**
  * Initial state.
@@ -15,12 +14,8 @@ const initialState = {
  */
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ACTIVATE: {
-      state = { ...state, active: true };
-      break;
-    }
-    case DEACTIVATE: {
-      state = { ...state, active: false };
+    case TOGGLE: {
+      state = { ...state, active: !state.active };
       break;
     }
     default:
@@ -30,17 +25,9 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 /**
- * Activates the preview.
+ * Toggles preview.
  * @returns {Object} Action.
  */
-export function activatePreview() {
-  return { type: ACTIVATE };
-}
-
-/**
- * Deactivates the preview.
- * @returns {Object} Action.
- */
-export function deactivatePreview() {
-  return { type: DEACTIVATE };
+export function togglePreview() {
+  return { type: TOGGLE };
 }

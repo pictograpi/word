@@ -1,6 +1,6 @@
 import { combineReducers, compose, createStore } from "redux";
 import { devToolsEnhancer } from "redux-devtools-extension";
-import preview, { activatePreview, deactivatePreview } from "./preview";
+import preview from "./preview";
 
 const reducers = combineReducers({
   preview
