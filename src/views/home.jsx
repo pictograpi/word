@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import Editor from "components/editor";
 import Preview from "components/preview";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state, ownProps) => {
+  return { isPreviewActive: state.preview.active };
+};
+
+const mapDispatchToProps = dispatch => {};
 
 class Home extends Component {
   render() {
-    return <Preview />;
+    return this.props.isPreviewActive ? <Preview /> : <Editor />;
   }
 }
 
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
