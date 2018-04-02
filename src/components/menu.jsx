@@ -64,7 +64,7 @@ class Menu extends Component {
                 color="primary"
               />
             }
-            label="Previsualizar"
+            label="Preview"
           />
         </Toolbar>
       </AppBar>

@@ -14,7 +14,7 @@ export default class Editor extends Component {
           />
           <CardContent>
             <Typography component="h2" noWrap={true}>
-              Pictograma
+              Pictograph
             </Typography>
           </CardContent>
         </Card>

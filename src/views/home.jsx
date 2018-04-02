@@ -7,12 +7,10 @@ const mapStateToProps = (state, ownProps) => {
   return { isPreviewActive: state.preview.active };
 };
 
-const mapDispatchToProps = dispatch => {};
-
 class Home extends Component {
   render() {
     return this.props.isPreviewActive ? <Preview /> : <Editor />;
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);

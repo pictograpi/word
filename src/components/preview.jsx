@@ -23,7 +23,7 @@ class Preview extends Component {
         spacing={24}
       >
         <Grid item xs={11} sm={9} margin="normal">
-          <Typography variant="headline">Previsualización</Typography>
+          <Typography variant="headline">Preview</Typography>
         </Grid>
         <Grid item xs={11} sm={9} margin="normal">
           <Grid container alignItems="center" spacing={24}>

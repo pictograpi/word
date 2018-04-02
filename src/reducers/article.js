@@ -1,14 +1,12 @@
-const TOGGLE = "word/preview/toggle";
+const SET = "word/article/set";
 
 /**
  * Initial state.
  */
-const initialState = {
-  active: false
-};
+const initialState = { title: "New article" };
 
 /**
- * Preview reducer.
+ * Title reducer.
  *
  * @export
  * @param {any} [state=initialState]
@@ -17,22 +15,24 @@ const initialState = {
  */
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case TOGGLE: {
-      state = { ...state, active: !state.active };
+    case SET: {
+      state = { ...state, title: action.title };
       break;
     }
     default:
       break;
   }
+
   return state;
 }
 
 /**
- * Toggles preview.
+ * Sets new title.
  *
  * @export
- * @returns {Object} Action.
+ * @param {string} title New title.
+ * @returns {Object} Action
  */
-export function togglePreview() {
-  return { type: TOGGLE };
+export function setTitle(title) {
+  return { type: SET, title };
 }
