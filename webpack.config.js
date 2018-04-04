@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   mode: process.env.NODE_ENV || "development",
@@ -18,7 +19,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "./src/index.html" }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new Dotenv()
   ],
   resolve: {
     modules: ["node_modules", "./src"],
