@@ -7,17 +7,20 @@ import Header from "./components/header";
 import Menu from "./components/menu";
 import Home from "./views/home";
 import Store from "./reducers/index";
+import pictographs from "./services/api";
 
-render(
-  <Provider store={Store}>
-    <BrowserRouter>
-      <React.Fragment>
-        <CssBaseline />
-        <Header />
-        <Menu />
-        <Route path="/" component={Home} />
-      </React.Fragment>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("app-container")
-);
+pictographs.init().then(() => {
+  render(
+    <Provider store={Store}>
+      <BrowserRouter>
+        <React.Fragment>
+          <CssBaseline />
+          <Header />
+          <Menu />
+          <Route path="/" component={Home} />
+        </React.Fragment>
+      </BrowserRouter>
+    </Provider>,
+    document.getElementById("app-container")
+  );
+});
