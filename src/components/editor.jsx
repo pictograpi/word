@@ -2,16 +2,19 @@ import React, { Component } from "react";
 import Grid from "material-ui/Grid";
 import TextField from "material-ui/TextField";
 import { connect } from "react-redux";
-import { setTitle } from "reducers/article";
+import { setTitle, setText } from "reducers/article";
 
 const mapStateToProps = state => {
-  return { title: state.article.title };
+  return { title: state.article.title, text: state.article.text };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     handleTitleChange: event => {
       dispatch(setTitle(event.target.value));
+    },
+    handleTextChange: event => {
+      dispatch(setText(event.target.value));
     }
   };
 };
@@ -31,9 +34,11 @@ class Editor extends Component {
           <TextField
             id="multiline-flexible"
             label="Start writing here"
+            value={this.props.text}
+            onChange={this.props.handleTextChange.bind(this)}
             multiline
             fullWidth
-            rowsMax="4"
+            rowsMax="10"
             margin="normal"
           />
         </Grid>
