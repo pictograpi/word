@@ -4,7 +4,7 @@ const SET_TEXT = "word/article/setText";
 /**
  * Initial state.
  */
-const initialState = { title: "New article" };
+const initialState = { title: "New article", text: "" };
 
 /**
  * Title reducer.

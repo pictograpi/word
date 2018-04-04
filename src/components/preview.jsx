@@ -3,6 +3,7 @@ import { withStyles } from "material-ui/styles";
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
 import Pictograph from "./pictograph";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   preview: {
@@ -10,9 +11,18 @@ const styles = theme => ({
   }
 });
 
+const mapStateToProps = (state, ownProps) => {
+  return { text: state.article.text };
+};
+
 class Preview extends Component {
   render() {
     const { classes } = this.props;
+    const pictographsDom = this.props.text
+      .split(" ")
+      .map((word, index) => (
+        <Pictograph key={`${index}-${word}`} word={word} />
+      ));
 
     return (
       <Grid
@@ -27,12 +37,7 @@ class Preview extends Component {
         </Grid>
         <Grid item xs={11} sm={9} margin="normal">
           <Grid container alignItems="center" spacing={24}>
-            <Pictograph />
-            <Pictograph />
-            <Pictograph />
-            <Pictograph />
-            <Pictograph />
-            <Pictograph />
+            {pictographsDom}
           </Grid>
         </Grid>
       </Grid>
@@ -40,4 +45,4 @@ class Preview extends Component {
   }
 }
 
-export default withStyles(styles)(Preview);
+export default withStyles(styles)(connect(mapStateToProps)(Preview));
