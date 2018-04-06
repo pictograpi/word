@@ -5,7 +5,7 @@ import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import IconButton from "material-ui/IconButton";
-import Mail from "material-ui-icons/Mail";
+import Info from "material-ui-icons/Info";
 
 const styles = theme => ({
   flex: {
@@ -26,8 +26,13 @@ class Header extends Component {
           <Typography variant="title" color="inherit" className={classes.logo}>
             PictograpiWord
           </Typography>
-          <IconButton color="inherit" aria-label="Contact">
-            <Mail />
+          <IconButton
+            color="inherit"
+            aria-label="Info"
+            href="https://pictograpi.com"
+            target="_blank"
+          >
+            <Info />
           </IconButton>
         </Toolbar>
       </AppBar>
