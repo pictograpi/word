@@ -8,7 +8,13 @@ module.exports = {
     rules: [
       {
         test: /\.pcss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"]
+        use: [
+          process.env.NODE_ENV === "production"
+            ? MiniCssExtractPlugin.loader
+            : "style-loader",
+          "css-loader",
+          "postcss-loader"
+        ]
       },
       {
         test: /\.(jsx|js)$/,
