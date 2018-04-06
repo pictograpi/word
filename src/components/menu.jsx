@@ -18,7 +18,8 @@ import { togglePreview } from "reducers/preview";
 const styles = theme => ({
   preview: {
     flexGrow: 1,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    display: "flex"
   }
 });
 
@@ -54,18 +55,19 @@ class Menu extends Component {
           <IconButton color="inherit" aria-label="Print">
             <Share />
           </IconButton>
-          <FormControlLabel
-            onChange={this.props.onPreviewToggle}
-            className={classes.preview}
-            control={
-              <Switch
-                checked={this.props.isPreviewActive}
-                value="isPreview"
-                color="primary"
-              />
-            }
-            label="Preview"
-          />
+          <div className={classes.preview}>
+            <FormControlLabel
+              onChange={this.props.onPreviewToggle}
+              control={
+                <Switch
+                  checked={this.props.isPreviewActive}
+                  value="isPreview"
+                  color="primary"
+                />
+              }
+              label="Preview"
+            />
+          </div>
         </Toolbar>
       </AppBar>
     );
