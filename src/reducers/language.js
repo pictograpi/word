@@ -1,7 +1,7 @@
 /**
  * Initial state.
  */
-const initialState = { selectedLanguageCode: "fr-FR" };
+const initialState = { selectedLanguageCode: "es-ES" };
 
 /**
  * Language reducer.

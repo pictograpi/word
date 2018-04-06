@@ -40,7 +40,7 @@ export function getWords(word, languageCode) {
   return firebase
     .firestore()
     .collection("words")
-    .where("word", "==", word)
+    .where("word", "==", word.replace(/[^\w\s]/gi, ""))
     .where("languageCode", "==", languageCode)
     .get()
     .then(querySnapshot => {
@@ -48,4 +48,12 @@ export function getWords(word, languageCode) {
       querySnapshot.forEach(doc => data.push(doc.data()));
       return data;
     });
+}
+
+export function getImageURL(imageId) {
+  return firebase
+    .storage()
+    .ref()
+    .child(imageId)
+    .getDownloadURL();
 }
