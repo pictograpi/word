@@ -1,15 +1,27 @@
-# react-tailwindcss-webpack
+# word
 
-This is a React + TailwindCSS + Webpack boilerplate.
+A project to translate what you write into pictographs.
 
-# Usage
+# Development
+This project has been created using React + MaterialUI + Webpack. It has these tasks:
 
-1.  Edit package.json with your own data.
-2.  Start coding.
+npm run dev: Compiles the code and launches a server to test while development.
 
-Find more information here:
+# Configuration
 
-* https://reactjs.org
-* https://tailwindcss.com
-* https://www.postcss.parts
-* https://webpack.js.org
+This project uses a .env file to configure some information, here you have an example:
+
+```
+FIREBASE_API_KEY=my-awesome-key
+FIREBASE_AUTH_DOMAIN=the-auth-domain
+FIREBASE_DATABASE_URL=a-database-url
+FIREBASE_PROJECT_ID=project-id
+FIREBASE_STORAGE_BUCKET=storage-bucket
+FIREBASE_USER=pictograpi-user
+FIREBASE_PASSWORD=pictograpi-pass
+```
+
+Fill information above with your own information.
+
+# Credits
+- [ARASAAC](http://arasaac.org)
