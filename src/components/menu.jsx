@@ -47,10 +47,10 @@ class Menu extends Component {
     return (
       <AppBar position="sticky" color="default">
         <Toolbar>
-          <IconButton color="inherit" aria-label="Print">
+          <IconButton color="inherit" aria-label="Print" disabled>
             <Print />
           </IconButton>
-          <IconButton color="inherit" aria-label="Join">
+          <IconButton color="inherit" aria-label="Join" disabled>
             <CompareArrows />
           </IconButton>
           <IconButton
@@ -67,7 +67,7 @@ class Menu extends Component {
           >
             <FontDownload />
           </IconButton>
-          <IconButton color="inherit" aria-label="Print">
+          <IconButton color="inherit" aria-label="Share" disabled>
             <Share />
           </IconButton>
           <div className={classes.preview}>
