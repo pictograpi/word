@@ -52,7 +52,8 @@ const styles = theme => ({
 const mapStateToProps = (state, ownProps) => {
   return {
     selectedLanguageCode: state.language.selectedLanguageCode,
-    isBorderActive: state.editor.borderActive
+    isBorderActive: state.editor.borderActive,
+    isTextActive: state.editor.textActive
   };
 };
 
@@ -95,11 +96,13 @@ class Editor extends Component {
               <CircularProgress className={classes.loading} />
             </div>
           )}
-          <CardContent>
-            <Typography component="h2" noWrap={true} className={classes.text}>
-              {this.props.word}
-            </Typography>
-          </CardContent>
+          {this.props.isTextActive && (
+            <CardContent>
+              <Typography component="h2" noWrap={true} className={classes.text}>
+                {this.props.word}
+              </Typography>
+            </CardContent>
+          )}
         </Card>
       </Grid>
     );

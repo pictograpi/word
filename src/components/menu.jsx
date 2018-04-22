@@ -14,7 +14,7 @@ import Switch from "material-ui/Switch";
 import Share from "material-ui-icons/Share";
 import { connect } from "react-redux";
 import { togglePreview } from "reducers/preview";
-import { setBorderActive } from "reducers/editor";
+import { setBorderActive, setTextActive } from "reducers/editor";
 
 const styles = theme => ({
   preview: {
@@ -25,13 +25,18 @@ const styles = theme => ({
 });
 
 const mapStateToProps = (state, ownProps) => {
-  return { isPreviewActive: state.preview.active, isBorderActive: state.editor.borderActive };
+  return {
+    isPreviewActive: state.preview.active,
+    isBorderActive: state.editor.borderActive,
+    isTextActive: state.editor.textActive
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     handlPreviewClick: () => dispatch(togglePreview()),
-    handleBorderClick: value => dispatch(setBorderActive(value))
+    handleBorderClick: value => dispatch(setBorderActive(value)),
+    handleTextClick: value => dispatch(setTextActive(value))
   };
 };
 
@@ -55,7 +60,11 @@ class Menu extends Component {
           >
             <CropSquare />
           </IconButton>
-          <IconButton color="inherit" aria-label="Font">
+          <IconButton
+            color={this.props.isTextActive ? "primary" : "inherit"}
+            aria-label="Font"
+            onClick={() => this.props.handleTextClick(!this.props.isTextActive)}
+          >
             <FontDownload />
           </IconButton>
           <IconButton color="inherit" aria-label="Print">
