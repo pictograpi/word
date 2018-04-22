@@ -14,6 +14,7 @@ import Switch from "material-ui/Switch";
 import Share from "material-ui-icons/Share";
 import { connect } from "react-redux";
 import { togglePreview } from "reducers/preview";
+import { setBorderActive } from "reducers/editor";
 
 const styles = theme => ({
   preview: {
@@ -24,12 +25,13 @@ const styles = theme => ({
 });
 
 const mapStateToProps = (state, ownProps) => {
-  return { isPreviewActive: state.preview.active };
+  return { isPreviewActive: state.preview.active, isBorderActive: state.editor.borderActive };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPreviewToggle: () => dispatch(togglePreview())
+    handlPreviewClick: () => dispatch(togglePreview()),
+    handleBorderClick: value => dispatch(setBorderActive(value))
   };
 };
 
@@ -46,7 +48,11 @@ class Menu extends Component {
           <IconButton color="inherit" aria-label="Join">
             <CompareArrows />
           </IconButton>
-          <IconButton color="inherit" aria-label="Border">
+          <IconButton
+            onClick={() => this.props.handleBorderClick(!this.props.isBorderActive)}
+            color={this.props.isBorderActive ? "primary" : "inherit"}
+            aria-label="Border"
+          >
             <CropSquare />
           </IconButton>
           <IconButton color="inherit" aria-label="Font">
@@ -57,14 +63,8 @@ class Menu extends Component {
           </IconButton>
           <div className={classes.preview}>
             <FormControlLabel
-              onChange={this.props.onPreviewToggle}
-              control={
-                <Switch
-                  checked={this.props.isPreviewActive}
-                  value="isPreview"
-                  color="primary"
-                />
-              }
+              onChange={this.props.handlPreviewClick}
+              control={<Switch checked={this.props.isPreviewActive} value="isPreview" color="primary" />}
               label="Preview"
             />
           </div>
@@ -74,6 +74,4 @@ class Menu extends Component {
   }
 }
 
-export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(Menu)
-);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Menu));

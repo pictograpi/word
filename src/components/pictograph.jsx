@@ -23,13 +23,37 @@ const styles = theme => ({
     backgroundSize: "90%",
     backgroundPosition: "center"
   },
+  "common-noun": {
+    borderColor: "red !important"
+  },
+  adjective: {
+    borderColor: "yellow !important"
+  },
+  verb: {
+    borderColor: "blue !important"
+  },
+  miscellanea: {
+    borderColor: "green !important"
+  },
+  "proper-noun": {
+    borderColor: "grey !important"
+  },
+  social: {
+    borderColor: "purple !important"
+  },
+  imageWithBorder: {
+    border: "solid 2px transparent"
+  },
   text: {
     textAlign: "center"
   }
 });
 
 const mapStateToProps = (state, ownProps) => {
-  return { selectedLanguageCode: state.language.selectedLanguageCode };
+  return {
+    selectedLanguageCode: state.language.selectedLanguageCode,
+    isBorderActive: state.editor.borderActive
+  };
 };
 
 class Editor extends Component {
@@ -47,6 +71,8 @@ class Editor extends Component {
           throw new Error();
         }
 
+        this.setState({ type: selectedWord.typeCode });
+
         return getImageURL(selectedWord.imageId);
       })
       .then(url => {
@@ -57,16 +83,13 @@ class Editor extends Component {
 
   render() {
     const { classes } = this.props;
+    const imageClasses = [this.props.isBorderActive && classes.imageWithBorder, classes[this.state.type]].join(" ");
 
     return (
       <Grid item xs={6} sm={4} md={2}>
-        <Card>
+        <Card className={imageClasses}>
           {this.state.imageUrl || this.state.imageFailure ? (
-            <CardMedia
-              className={classes.image}
-              image={this.state.imageUrl}
-              title={this.props.word}
-            />
+            <CardMedia className={classes.image} image={this.state.imageUrl} title={this.props.word} />
           ) : (
             <div className={classes.loadingWrapper}>
               <CircularProgress className={classes.loading} />
