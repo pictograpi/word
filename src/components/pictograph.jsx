@@ -68,15 +68,21 @@ class Editor extends Component {
 
   componentWillMount() {
     if (!this.props.pictographs) {
-      getPictographs(this.props.word, this.props.selectedLanguageCode).then(pictographs =>
-        Store.dispatch(addPictographs(`${this.props.index}-${this.props.word}`, pictographs))
-      );
+      getPictographs(this.props.word, this.props.selectedLanguageCode).then(pictographs => {
+        // Set selected
+        if (pictographs.length >= 0) {
+          pictographs[0].selected = true;
+        }
+
+        Store.dispatch(addPictographs(`${this.props.index}-${this.props.word}`, pictographs));
+      });
     }
   }
 
   render() {
     const { classes } = this.props;
-    const pictograph = this.props.pictographs && this.props.pictographs[0];
+    // Choose selected pictograph
+    const pictograph = this.props.pictographs && this.props.pictographs.filter(({ selected }) => selected)[0];
     const imageClasses = [
       this.props.isBorderVisible && classes.imageWithBorder,
       pictograph && classes[pictograph.typeCode]
