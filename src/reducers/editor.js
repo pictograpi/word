@@ -1,7 +1,8 @@
 const SET_BORDER_VISIBLE = "word/editor/setBorderVisible";
 const SET_TEXT_VISIBLE = "word/editor/setTextVisible";
+const SET_PREVIEW_VISIBLE = "word/editor/setPreviewVisible";
 
-const initialState = { borderVisible: true, textVisible: true };
+const initialState = { borderVisible: true, textVisible: true, previewVisible: false };
 
 /**
  * Editor reducer.
@@ -16,6 +17,10 @@ export default function reducer(state = initialState, action = {}) {
     }
     case SET_TEXT_VISIBLE: {
       state = { ...state, textVisible: action.value };
+      break;
+    }
+    case SET_PREVIEW_VISIBLE: {
+      state = { ...state, previewVisible: action.value };
       break;
     }
     default:
@@ -41,4 +46,13 @@ export function setBorderVisible(value) {
  */
 export function setTextVisible(value) {
   return { type: SET_TEXT_VISIBLE, value };
+}
+
+/**
+ * Sets preview visible.
+ * @param {boolean} value New preview visible value.
+ * @returns {Object} Action.
+ */
+export function setPreviewVisible(value) {
+  return { type: SET_PREVIEW_VISIBLE, value };
 }

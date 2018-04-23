@@ -13,8 +13,7 @@ import { FormControlLabel } from "material-ui/Form";
 import Switch from "material-ui/Switch";
 import Share from "material-ui-icons/Share";
 import { connect } from "react-redux";
-import { togglePreview } from "reducers/preview";
-import { setBorderVisible, setTextVisible } from "reducers/editor";
+import { setBorderVisible, setTextVisible, setPreviewVisible } from "reducers/editor";
 
 const styles = theme => ({
   preview: {
@@ -26,14 +25,14 @@ const styles = theme => ({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isPreviewActive: state.preview.active,
+    isPreviewVisible: state.editor.previewVisible,
     isBorderVisible: state.editor.borderVisible,
     isTextVisible: state.editor.textVisible
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  handlPreviewClick: () => dispatch(togglePreview()),
+  handlPreviewClick: value => dispatch(setPreviewVisible(value)),
   handleBorderClick: value => dispatch(setBorderVisible(value)),
   handleTextClick: value => dispatch(setTextVisible(value))
 });
@@ -70,8 +69,8 @@ class Menu extends Component {
           </IconButton>
           <div className={classes.preview}>
             <FormControlLabel
-              onChange={this.props.handlPreviewClick}
-              control={<Switch checked={this.props.isPreviewActive} value="isPreview" color="primary" />}
+              onChange={() => this.props.handlPreviewClick(!this.props.isPreviewVisible)}
+              control={<Switch checked={this.props.isPreviewVisible} value="isPreview" color="primary" />}
               label="Preview"
             />
           </div>

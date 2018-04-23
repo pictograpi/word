@@ -4,12 +4,12 @@ import Preview from "components/preview";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state, ownProps) => {
-  return { isPreviewActive: state.preview.active };
+  return { isPreviewVisible: state.editor.previewVisible };
 };
 
 class Home extends Component {
   render() {
-    return this.props.isPreviewActive ? <Preview /> : <Editor />;
+    return this.props.isPreviewVisible ? <Preview /> : <Editor />;
   }
 }
 
