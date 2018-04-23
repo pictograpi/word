@@ -4,7 +4,9 @@ import Card, { CardActions, CardContent, CardMedia } from "material-ui/Card";
 import Typography from "material-ui/Typography";
 import Grid from "material-ui/Grid";
 import { CircularProgress } from "material-ui/Progress";
-import { getWords, getImageURL } from "services/api";
+import Store from "reducers";
+import { getPictographs } from "services/api";
+import { addPictographs } from "reducers/article";
 import { connect } from "react-redux";
 
 const styles = theme => ({
@@ -53,7 +55,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     selectedLanguageCode: state.language.selectedLanguageCode,
     isBorderVisible: state.editor.borderVisible,
-    isTextVisible: state.editor.textVisible
+    isTextVisible: state.editor.textVisible,
+    pictographs: state.article.pictographs[`${ownProps.index}-${ownProps.word}`]
   };
 };
 
@@ -64,38 +67,39 @@ class Editor extends Component {
   }
 
   componentWillMount() {
-    getWords(this.props.word, this.props.selectedLanguageCode)
-      .then(words => {
-        const selectedWord = words[0];
-
-        if (!selectedWord) {
-          throw new Error();
-        }
-
-        this.setState({ type: selectedWord.typeCode });
-
-        return getImageURL(selectedWord.imageId);
-      })
-      .then(url => {
-        this.setState({ imageUrl: url });
-      })
-      .catch(() => this.setState({ imageFailure: true }));
+    if (!this.props.pictographs) {
+      getPictographs(this.props.word, this.props.selectedLanguageCode).then(pictographs =>
+        Store.dispatch(addPictographs(`${this.props.index}-${this.props.word}`, pictographs))
+      );
+    }
   }
 
   render() {
     const { classes } = this.props;
-    const imageClasses = [this.props.isBorderVisible && classes.imageWithBorder, classes[this.state.type]].join(" ");
+    const pictograph = this.props.pictographs && this.props.pictographs[0];
+    const imageClasses = [
+      this.props.isBorderVisible && classes.imageWithBorder,
+      pictograph && classes[pictograph.typeCode]
+    ].join(" ");
+    // Image DOM loading
+    let imageDom = (
+      <div className={classes.loadingWrapper}>
+        <CircularProgress className={classes.loading} />
+      </div>
+    );
+
+    if (typeof this.props.pictographs === "object" && this.props.pictographs.length === 0) {
+      // No image
+      imageDom = <CardMedia className={classes.image} image="" title={this.props.word} />;
+    } else if (pictograph) {
+      // Image loaded
+      imageDom = <CardMedia className={classes.image} image={pictograph.images[0]} title={this.props.word} />;
+    }
 
     return (
       <Grid item xs={6} sm={4} md={2}>
         <Card className={imageClasses}>
-          {this.state.imageUrl || this.state.imageFailure ? (
-            <CardMedia className={classes.image} image={this.state.imageUrl} title={this.props.word} />
-          ) : (
-            <div className={classes.loadingWrapper}>
-              <CircularProgress className={classes.loading} />
-            </div>
-          )}
+          {imageDom}
           {this.props.isTextVisible && (
             <CardContent>
               <Typography component="h2" noWrap={true} className={classes.text}>

@@ -19,7 +19,7 @@ class Preview extends Component {
   render() {
     const { classes } = this.props;
     const pictographsDom = this.props.text.split(" ").map((word, index) => {
-      return <Pictograph key={`${index}-${word}`} word={word} />;
+      return <Pictograph key={`${index}-${word}`} word={word} index={index} />;
     });
 
     return (

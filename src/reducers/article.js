@@ -1,17 +1,18 @@
 const SET_TITLE = "word/article/setTitle";
 const SET_TEXT = "word/article/setText";
+const ADD_PICTOGRAPHS = "word/article/addPictograph";
 
 /**
  * Initial state.
  */
-const initialState = { title: "New article", text: "" };
+const initialState = { title: "New article", text: "", pictographs: {} };
 
 /**
  * Title reducer.
  *
  * @export
- * @param {any} [state=initialState]
- * @param {any} [action={}]
+ * @param {any} state
+ * @param {any} action
  * @returns {Object} New state.
  */
 export default function reducer(state = initialState, action = {}) {
@@ -23,6 +24,9 @@ export default function reducer(state = initialState, action = {}) {
     case SET_TEXT: {
       state = { ...state, text: action.text };
       break;
+    }
+    case ADD_PICTOGRAPHS: {
+      state = { ...state, pictographs: { ...state.pictographs, [action.key]: action.pictographs } };
     }
     default:
       break;
@@ -51,4 +55,13 @@ export function setTitle(title) {
  */
 export function setText(text) {
   return { type: SET_TEXT, text };
+}
+
+/**
+ * Adds a new pictograph to the array.
+ * @param {string} key Key of the pictograph
+ * @param {Object} pictographs Pictographs to be saved
+ */
+export function addPictographs(key, pictographs) {
+  return { type: ADD_PICTOGRAPHS, key, pictographs };
 }
