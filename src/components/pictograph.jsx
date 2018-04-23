@@ -52,8 +52,8 @@ const styles = theme => ({
 const mapStateToProps = (state, ownProps) => {
   return {
     selectedLanguageCode: state.language.selectedLanguageCode,
-    isBorderActive: state.editor.borderActive,
-    isTextActive: state.editor.textActive
+    isBorderVisible: state.editor.borderVisible,
+    isTextVisible: state.editor.textVisible
   };
 };
 
@@ -84,7 +84,7 @@ class Editor extends Component {
 
   render() {
     const { classes } = this.props;
-    const imageClasses = [this.props.isBorderActive && classes.imageWithBorder, classes[this.state.type]].join(" ");
+    const imageClasses = [this.props.isBorderVisible && classes.imageWithBorder, classes[this.state.type]].join(" ");
 
     return (
       <Grid item xs={6} sm={4} md={2}>
@@ -96,7 +96,7 @@ class Editor extends Component {
               <CircularProgress className={classes.loading} />
             </div>
           )}
-          {this.props.isTextActive && (
+          {this.props.isTextVisible && (
             <CardContent>
               <Typography component="h2" noWrap={true} className={classes.text}>
                 {this.props.word}

@@ -14,7 +14,7 @@ import Switch from "material-ui/Switch";
 import Share from "material-ui-icons/Share";
 import { connect } from "react-redux";
 import { togglePreview } from "reducers/preview";
-import { setBorderActive, setTextActive } from "reducers/editor";
+import { setBorderVisible, setTextVisible } from "reducers/editor";
 
 const styles = theme => ({
   preview: {
@@ -27,18 +27,16 @@ const styles = theme => ({
 const mapStateToProps = (state, ownProps) => {
   return {
     isPreviewActive: state.preview.active,
-    isBorderActive: state.editor.borderActive,
-    isTextActive: state.editor.textActive
+    isBorderVisible: state.editor.borderVisible,
+    isTextVisible: state.editor.textVisible
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handlPreviewClick: () => dispatch(togglePreview()),
-    handleBorderClick: value => dispatch(setBorderActive(value)),
-    handleTextClick: value => dispatch(setTextActive(value))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  handlPreviewClick: () => dispatch(togglePreview()),
+  handleBorderClick: value => dispatch(setBorderVisible(value)),
+  handleTextClick: value => dispatch(setTextVisible(value))
+});
 
 class Menu extends Component {
   render() {
@@ -54,16 +52,16 @@ class Menu extends Component {
             <CompareArrows />
           </IconButton>
           <IconButton
-            onClick={() => this.props.handleBorderClick(!this.props.isBorderActive)}
-            color={this.props.isBorderActive ? "primary" : "inherit"}
+            onClick={() => this.props.handleBorderClick(!this.props.isBorderVisible)}
+            color={this.props.isBorderVisible ? "primary" : "inherit"}
             aria-label="Border"
           >
             <CropSquare />
           </IconButton>
           <IconButton
-            color={this.props.isTextActive ? "primary" : "inherit"}
+            color={this.props.isTextVisible ? "primary" : "inherit"}
             aria-label="Font"
-            onClick={() => this.props.handleTextClick(!this.props.isTextActive)}
+            onClick={() => this.props.handleTextClick(!this.props.isTextVisible)}
           >
             <FontDownload />
           </IconButton>

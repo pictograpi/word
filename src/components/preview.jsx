@@ -18,20 +18,12 @@ const mapStateToProps = (state, ownProps) => {
 class Preview extends Component {
   render() {
     const { classes } = this.props;
-    const pictographsDom = this.props.text
-      .split(" ")
-      .map((word, index) => (
-        <Pictograph key={`${index}-${word}`} word={word} />
-      ));
+    const pictographsDom = this.props.text.split(" ").map((word, index) => {
+      return <Pictograph key={`${index}-${word}`} word={word} />;
+    });
 
     return (
-      <Grid
-        className={classes.preview}
-        container
-        alignItems="center"
-        justify="center"
-        spacing={24}
-      >
+      <Grid className={classes.preview} container alignItems="center" justify="center" spacing={24}>
         <Grid item xs={11} sm={9} margin="normal">
           <Typography variant="headline">Preview</Typography>
         </Grid>
